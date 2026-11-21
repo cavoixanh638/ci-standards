@@ -1,0 +1,2 @@
+# Only needed when --live reconciliation is enabled. Offline webhook tests use stdlib.
+PyJWT[crypto]>=2.10,<3
