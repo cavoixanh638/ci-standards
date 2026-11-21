@@ -13,3 +13,13 @@ secrets/
 *.zip
 *.tar.gz
 *.log
+# Private runtime state from local GitHub App receiver
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3-wal
+*.sqlite3-shm
