@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "owner": "cavoixanh638",
+  "rollout": {
+    "mode": "dry_run",
+    "detect_current_repositories": true,
+    "detect_future_repositories": true,
+    "onboard_without_review": false,
+    "create_pr_automatically": false,
+    "require_owner_approval": true
+  },
+  "automation": {
+    "github_app_registered": false,
+    "webhook_receiver_configured": false,
+    "allow_repository_writes": false
+  },
+  "ci": {
+    "allow_workflow_execution": false,
+    "allow_private_repo_execution": false,
+    "allow_paid_runners": false,
+    "allow_automatic_release": false,
+    "allow_automatic_deploy": false,
+    "allow_auto_merge": false,
+    "use_local_tests_first": true,
+    "reuse_requires_fingerprint_and_evidence": true,
+    "preserve_required_checks": true,
+    "fail_closed_on_unknown_change": true,
+    "max_additional_paid_usd": 0
+  },
+  "test_tiers": [
+    "quick",
+    "selective",
+    "acceptance"
+  ]
+}
