@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "owner": "cavoixanh638",
+  "repositories": [
+    {
+      "name": "cavoixanh638/example-repo",
+      "visibility": "public",
+      "default_branch": "main",
+      "root_files": [
+        "package.json",
+        "README.md"
+      ]
+    }
+  ]
+}

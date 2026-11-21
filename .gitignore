@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+private/
+secrets/
+*account-inventory*.json
+*.csv
+*.zip
+*.tar.gz
+*.log

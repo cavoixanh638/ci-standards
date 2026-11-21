@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "repositories": {
+    "example/website": {
+      "tech": "web",
+      "tests": {
+        "quick": "npm run typecheck",
+        "selective": "npm test",
+        "acceptance": "npm run build"
+      },
+      "require_security_review": true,
+      "allow_auto_deploy": false
+    }
+  }
+}
