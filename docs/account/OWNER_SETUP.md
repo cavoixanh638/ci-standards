@@ -1,15 +1,11 @@
-# Các bước thao tác GitHub của chủ tài khoản
+# Owner setup: staged GitHub CI Standards
 
-## Bước 1 — Đã thực hiện
+**Step 1 COMPLETE:** The owner created `cavoixanh638/ci-standards` (Public). Main has a minimal README.
 
-Tạo repository `cavoixanh638/ci-standards` dạng Public. Repo đã được kết nối và khởi tạo `main` với README tối thiểu.
+**Step 2 CANDIDATE:** Draft PR #1 `feat/account-wide-qa-bootstrap-20261121` into main. Tools and account policy in `dry_run`; not merged.
 
-## Bước 2 — Đang nghiệm thu
+**Step 3 CANDIDATE:** Stacked Draft PR #2 `feat/github-app-detector-step3-20261122` into Step 2. Python/SQLite read-only webhook detector; not deployed.
 
-Bộ mã được đề xuất qua nhánh `feat/account-wide-qa-bootstrap-20261121` và Draft PR vào `main`; chưa merge, không kích hoạt Actions. Xem `docs/account/STEP2_CHECKPOINT.md` và kiểm thử trước khi phê duyệt.
+**Step 4 CANDIDATE:** Stacked Draft PR (see GitHub PR list) implementing `cloudflare_worker/` for Cloudflare Workers Free + D1. No Cloudflare App, D1, live GitHub App, webhook or cron has been provisioned by ChatGPT. The owner must choose/authorize the Cloudflare account, Free plan, D1 and GitHub App credentials. Read `cloudflare_worker/README.md` for the full private activation checklist. **Do not paste secrets or PEM files into ChatGPT.**
 
-## Bước 3 — Chưa thực hiện
-
-GitHub App riêng của chủ tài khoản và webhook receiver **chưa có**. Không được tạo bí mật trong chat hoặc commit. Để App thực sự tự phát hiện dự án mới, sau khi mã backend được duyệt sẽ cần bạn đăng ký App ở Settings → Developer settings → GitHub Apps, chọn sự kiện và cài vào All repositories. Phải kiểm tra quyền tối thiểu và có cơ chế ngắt khẩn cấp trước khi kích hoạt.
-
-Không chuyển repository Private thành Public, không đổi Settings/Billing, không tự merge/deploy.
+Future activation gates: real Cloudflare runtime tests, metadata-read-only GitHub App installation approved by owner, D1 private persistence/backup, signed webhook redelivery, free-usage audit, and emergency stop. No repository write permissions until separately approved.

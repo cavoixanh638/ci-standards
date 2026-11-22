@@ -23,3 +23,10 @@ secrets/
 *.sqlite-shm
 *.sqlite3-wal
 *.sqlite3-shm
+# Local Cloudflare configuration, deployment metadata, and secret fixtures
+.wrangler/
+cloudflare_worker/wrangler.toml
+.dev.vars
+.dev.vars.*
+cloudflare_worker/.dev.vars
+cloudflare_worker/.dev.vars.*

@@ -1,0 +1,9 @@
+{
+  "name": "ci-standards-cloudflare-worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check src/index.mjs && node --test tests/*.test.mjs"
+  }
+}
