@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "owner": "cavoixanh638",
+  "checks": {
+    "cloudflare_free_confirmed": false,
+    "d1_private_ready": false,
+    "worker_https_dry_run": false,
+    "webhook_disabled_in_dry_run": false,
+    "github_app_metadata_only": false,
+    "github_app_scope_reviewed": false,
+    "signed_delivery_verified": false,
+    "github_pagination_verified": false,
+    "quota_and_no_paid_spend_verified": false,
+    "emergency_stop_verified": false,
+    "owner_approved_readonly": false
+  }
+}
