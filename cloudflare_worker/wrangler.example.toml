@@ -1,0 +1,21 @@
+# TEMPLATE ONLY: copy to wrangler.toml after Cloudflare Free is confirmed.
+# Do not deploy or enable event subscriptions before completing the owner checklist.
+name = "ci-standards-detector"
+main = "src/index.mjs"
+compatibility_date = "2026-11-01"
+workers_dev = true
+
+[vars]
+MODE = "dry_run"
+OWNER_LOGIN = "cavoixanh638"
+OWNER_ID = "285230476"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "ci-standards-private"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+# Enable ONLY after the GitHub App is registered and read-only testing passes:
+# [triggers]
+# crons = ["0 */6 * * *"]

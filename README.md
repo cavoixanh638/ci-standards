@@ -1,27 +1,26 @@
-# CI Standards — Account-wide QA standard (staged)
+# CI Standards - staged account-wide GitHub QA system
 
-Repository trung tâm dành cho `cavoixanh638`. **Giai đoạn 3: bộ nhận webhook và kiểm kê GitHub App chỉ đọc đã được viết/test ngoại tuyến; chưa đăng ký App, chưa triển khai máy chủ, chưa kích hoạt tự động thực tế.**
+Central source of testing policies and a planned repository discovery service for `cavoixanh638`. **Not an active GitHub App; not deployed.** Work is divided into stacked Draft PRs so nothing automatically changes `main` or triggers GitHub Actions.
 
-## Các thành phần hiện có
+## Components
 
-- `config/account.defaults.json`: chính sách `dry_run`, không tự tạo PR, không chạy CI, không merge, không deploy hoặc tiêu tiền GitHub.
-- `tools/select_tests.py` + `tools/policy-hdnd.json`: chọn test thận trọng theo ảnh hưởng của mã nguồn (chưa dùng như cổng production).
-- `tools/checkpoint.py` + JSON Schema: bằng chứng PASS/FAIL/NOT_RUN và fingerprint kiểm thử.
-- `tools/plan_onboarding.py`: lập kế hoạch onboarding từ inventory JSON ngoại tuyến.
-- **`github_app/`:** GitHub App controller PoC: webhook HMAC-SHA256, chống replay bằng SQLite, kiểm tra owner/installation, nhận diện repo mới/đổi quyền, đồng bộ metadata read-only có phân trang và chế độ định kỳ khi operator bật `--live`.
-- `tests/`: unit và HTTP integration test cục bộ. Không có `.github/workflows`, không gọi Actions.
-- `docs/account/STEP3_WEBHOOK.md`: kiến trúc, quyền tối thiểu, setup với HTTPS, dừng khẩn.
+- `config/account.defaults.json`: `dry_run`, no automatic PR, workflow, merge, deploy or additional paid spend.
+- `tools/`: conservative test selection, fingerprints/checkpoints, offline onboarding policy validation.
+- `github_app/`: Step 3 Python + SQLite local read-only webhook detection prototype.
+- **`cloudflare_worker/`: Step 4 Cloudflare Workers Free + D1 HTTPS candidate, with no active trigger or credentials.** Supports HMAC-authenticated webhook and periodic metadata-only reconciliation after owner activation.
+- `tests/` and `cloudflare_worker/tests/`: local Python and Node.js/SQLite tests, respectively.
+- `docs/account/STEP4_HOSTING_DECISION.md` and `docs/account/STEP4_CHECKPOINT.md`: hosting selection, safety and verification status.
 
-## Tự kiểm thử mà không dùng GitHub Actions
+## Test without cloud services
 
 ```sh
 python3 -m unittest discover -s tests -v
 python3 tools/validate_account_policy.py config/account.defaults.json
-python3 -m github_app.cli --help
+cd cloudflare_worker && npm test
 ```
 
-## Quy tắc an toàn
+## Deployment gate
 
-Không commit inventory Private, token/key, bản ghi/tài liệu riêng hoặc billing export vào repo Public. Không coi GitHub App kết nối ChatGPT là App receiver của hệ thống. Chỉ khi có HTTPS host, App do chủ tài khoản đăng ký với **Metadata: read**, cài **All repositories** và cấu hình khóa an toàn mới có thể nhận webhook thực tế. Để tự tạo PR, cần bước riêng xét quyền ghi và điều kiện kiểm thử, không được mặc định bật.
+The Worker is **inert by default** (`MODE=dry_run`, no active Cron Trigger). Do not deploy it, register an App, or change Billing on the user's behalf without the required Cloudflare account and explicit owner approval. Use a distinct owner-managed GitHub App with **Metadata: Read-only**; the existing ChatGPT GitHub connector is not the new App. See [`cloudflare_worker/README.md`](cloudflare_worker/README.md) for private setup steps.
 
-Xem hướng dẫn tại [`github_app/README.md`](github_app/README.md), [`docs/account/STEP3_WEBHOOK.md`](docs/account/STEP3_WEBHOOK.md) và [`docs/account/STEP3_CHECKPOINT.md`](docs/account/STEP3_CHECKPOINT.md).
+**Always:** keep all Private repo inventories and credentials outside the Public Git repository; do not enable automated tests, writes or releases until each repository's required checks and triggers are reviewed. Never treat skipped or unexecuted tests as PASS.
